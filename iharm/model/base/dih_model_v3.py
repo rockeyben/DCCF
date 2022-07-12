@@ -359,6 +359,13 @@ class DeepImageHarmonizationUpsampleHSL_V3(nn.Module):
 
         outputs = dict()
         outputs['images'] = output_lowres
+    
+        outputs['stage1_filter'] = inter_result_lowres['stage1_filter']
+        outputs['stage2_filter'] = inter_result_lowres['stage2_filter']
+        outputs['stage3_filter'] = inter_result_lowres['stage3_filter']
+        outputs['stage3_output'] = inter_result_lowres['stage3_output'] * mask + image * (1 - mask)
+
+    
         if self.use_hr:
             filters_fullres = F.upsample(filters_lowres, size=(H, W), mode='bicubic')
             refine_filters_fullres = None
@@ -373,7 +380,7 @@ class DeepImageHarmonizationUpsampleHSL_V3(nn.Module):
             else:
                 output_fullres = output_fullres * mask_fullres + image_fullres * (1 - mask_fullres)
             outputs['images_fullres'] = output_fullres
-            #outputs['stage3_output_fullres'] = inter_result_fullres['stage3_output'] * mask_fullres + image_fullres * (1 - mask_fullres)
+            outputs['stage3_output_fullres'] = inter_result_fullres['stage3_output'] * mask_fullres + image_fullres * (1 - mask_fullres)
         
         if record:
             if self.tune_method == 'default':
