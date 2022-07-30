@@ -60,7 +60,7 @@ def train(model, cfg, model_cfg, start_epoch=0):
     loss_cfg.pixel_loss = MaskWeightedMSE(min_area=100)
     loss_cfg.pixel_loss_weight = 1.0
 
-    loss_cfg.pixel_loss_fullres = MaskWeightedMSE(min_area=100,  pred_name='images_fullres', 
+    loss_cfg.pixel_loss_fullres = MaskWeightedMSE(min_area=1000,  pred_name='images_fullres', 
             gt_image_name='target_images_fullres', gt_mask_name='masks')
     loss_cfg.pixel_loss_fullres_weight = 1.0
 
