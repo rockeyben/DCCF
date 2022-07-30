@@ -65,15 +65,15 @@ def train(model, cfg, model_cfg, start_epoch=0):
 
     loss_cfg.stage1_l_loss = MaskWeightedMSE(min_area=100, pred_name='stage1_Lmap',
             gt_image_name='gt_Lmap', gt_mask_name='masks')
-    loss_cfg.stage1_l_loss_weight = wl
+    loss_cfg.stage1_l_loss_weight = wl * 10
 
     loss_cfg.stage2_s_loss = MaskWeightedMSE(min_area=100, pred_name='stage2_Smap',
             gt_image_name='gt_Smap', gt_mask_name='masks')
-    loss_cfg.stage2_s_loss_weight = wl
+    loss_cfg.stage2_s_loss_weight = wl * 10
 
     loss_cfg.stage3_h_loss = MaskWeightedMSE(min_area=100, pred_name='stage3_Hmap',
             gt_image_name='gt_Hmap', gt_mask_name='masks')
-    loss_cfg.stage3_h_loss_weight = wl
+    loss_cfg.stage3_h_loss_weight = wl * 10
 
     loss_cfg.stage3_rgb_loss = MaskWeightedMSE(min_area=100, pred_name='stage3_output',
             gt_image_name='target_images', gt_mask_name='masks')
@@ -81,15 +81,15 @@ def train(model, cfg, model_cfg, start_epoch=0):
 
     loss_cfg.stage1_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage1_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage1_tv_loss_weight = wl * 0.01
+    loss_cfg.stage1_tv_loss_weight = wl
 
     loss_cfg.stage2_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage2_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage2_tv_loss_weight = wl * 0.01
+    loss_cfg.stage2_tv_loss_weight = wl
 
     loss_cfg.stage3_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage3_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage3_tv_loss_weight = wl * 0.01
+    loss_cfg.stage3_tv_loss_weight = wl
 
     
     num_epochs = 180
