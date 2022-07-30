@@ -140,7 +140,7 @@ def train(model, cfg, model_cfg, start_epoch=0):
 
     if len(cfg.gpu_ids) > 1:
         optimizer_params = {
-            'lr': 1e-3 * float(cfg.batch_size) / 16.0 * len(cfg.gpu_ids) / 2.0 / 10.0,
+            'lr': 1e-3 * float(cfg.batch_size) / 16.0 * len(cfg.gpu_ids),
             'betas': (0.9, 0.999), 'eps': 1e-8
         }
     else:
