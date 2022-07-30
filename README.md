@@ -33,16 +33,16 @@ You can specify another path in the [config.yml](./config.yml) (see `EXPS_PATH` 
 
 Start training with the following commands:
 ```.bash
-./train_dccf_idih_hrnet18s_v2p.sh
-./train_dccf_idih.sh
-./train_dccf_issam.sh
+./runs/train_dccf_idih_hrnet18s_v2p.sh
+./runs/train_dccf_idih.sh
+./runs/train_dccf_issam.sh
 ```
 
 The low-res training script only train at LR scale, the HR script will do joint training at LR & HR scale. Note that batch size may also affect final results.
 
 To compare with [CDTNet](https://github.com/bcmi/CDTNet-High-Resolution-Image-Harmonization), you should further finetune the dccf-issam model on HAdobe5k subset with this script:
 ```.bash
-./train_dccf_issam_finetune_adobe.sh
+./runs/train_dccf_issam_finetune_adobe.sh
 ```
 
 We used pre-trained HRNetV2 models from the [official repository](https://github.com/HRNet/HRNet-Image-Classification).
@@ -52,7 +52,6 @@ The main configuration can be changed at [mconfigs/base.py](./mconfigs/base.py)
 ```
 'npts': 8, # The nonlinearity of Lum Filter's curve
 'up_size':(768, 1024),  # upsampled size during train
-'use_disentangle' : True, # disentangle the HSL intermediate result
 'use_attn' :True & 'use_refine' : True,   # use attentive rendering module
 'use_hr' : True,      # open HR branch during train
 'use_blur_L' : True   # blur on L map
@@ -62,21 +61,21 @@ The main configuration can be changed at [mconfigs/base.py](./mconfigs/base.py)
 
 You can put pretrained model at [pretrained_models/](./pretrained_models), which can be directly used to re-implement results in the paper. It can be downloaded from [BaiduCloud (w8vg)](https://pan.baidu.com/s/1u5q94SzYciYkq5rspBaN7w). 
 ```.bash
-./test_dccf_idih_hrnet18s_v2p_pretrain.sh
-./test_dccf_idih_pretrain.sh
-./test_dccf_issam_pretrain.sh
+./runs/test_dccf_idih_hrnet18s_v2p_pretrain.sh
+./runs/test_dccf_idih_pretrain.sh
+./runs/test_dccf_issam_pretrain.sh
 ```
 
 To get baseline results, you can download the baseline models from [BaiduCloud (w8vg)](https://pan.baidu.com/s/1u5q94SzYciYkq5rspBaN7w) and put them at [pretrained_models/](./pretrained_models), then run:
 ```.bash
-./test_baselines_*.sh
+./runs/test_baselines_*.sh
 ```
 
 To get BGU high-resolution results, please refer to its official MATLAB implementation [code](https://github.com/google/bgu). Our code only generates intermediate low-resolution predictions for this baseline.
 
 ## Interactive Experiments
 
-Run [interactive_experiments.sh](./interactive_experiments.sh) to perform filter fusion with our deep comprehensible color filter. You can put customized images with their input masks in a directory and run this script.
+Run [interactive_experiments.sh](./runs/interactive_experiments.sh) to perform filter fusion with our deep comprehensible color filter. You can put customized images with their input masks in a directory and run this script.
 
 ## Acknowledgement
 
