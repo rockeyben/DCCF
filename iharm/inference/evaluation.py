@@ -178,7 +178,7 @@ def evaluate_dataset_upsample_hsl_refine(dataset, predictor, metrics_hub_lowres,
             # cv2.imwrite(os.path.join(visdir, '%s_stage3_Hmap_lowres.jpg' % imname), vis_s3_h_lowres)
             # cv2.imwrite(os.path.join(visdir, '%s_stage1_rgb.jpg' % imname), vis_s1_rgb[:, :, ::-1])
             # cv2.imwrite(os.path.join(visdir, '%s_stage2_rgb.jpg' % imname), vis_s2_rgb[:, :, ::-1])
-            cv2.imwrite(os.path.join(visdir, '%s_stage3_rgb.jpg' % imname), vis_s3_rgb[:, :, ::-1])
+            # cv2.imwrite(os.path.join(visdir, '%s_stage3_rgb.jpg' % imname), vis_s3_rgb[:, :, ::-1])
             cv2.imwrite(os.path.join(visdir, '%s_pred_lowres.jpg' % imname), pred[:, :, ::-1])
 
             # cv2.imwrite(os.path.join(visdir, '%s_input_fullres.jpg' % imname), raw_image[:, :, ::-1])
