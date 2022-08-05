@@ -65,7 +65,6 @@ class PredictorUpsampleHSL(object):
                 refine_filters_fullres = None
 
             output_fullres, inter_fullres = self.net.model.apply_filter(raw_image, filters_fullres, refine_filters=refine_filters_fullres, record=rc)
-            inter_fullres = {}
                 
             
             if self.net.model.use_attn:
