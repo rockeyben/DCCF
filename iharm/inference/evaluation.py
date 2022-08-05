@@ -21,8 +21,6 @@ def evaluate_dataset_rawsize(dataset, predictor, metrics_hub_lowres, metrics_hub
     gf = GuidedFilter(r, eps).cuda()
 
     for sample_i in trange(len(dataset), desc=f'Testing on {metrics_hub_lowres.name}'):
-        if sample_i > 10:
-            break
 
         sample = dataset.get_sample(sample_i)
         raw_input = sample['image']
@@ -89,8 +87,6 @@ def evaluate_dataset_rawsize(dataset, predictor, metrics_hub_lowres, metrics_hub
 def evaluate_dataset_upsample_hsl_refine(dataset, predictor, metrics_hub_lowres, metrics_hub_fullres, visdir=None):
 
     for sample_i in trange(len(dataset), desc=f'Testing on {metrics_hub_lowres.name}'):
-        if sample_i > 10:
-            break
 
         bdata = dataset.get_sample(sample_i)
         imname = dataset.dataset_samples[sample_i]
