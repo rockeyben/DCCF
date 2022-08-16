@@ -15,7 +15,7 @@ CUDA_VISIBLE_DEVICES=0,1 python3 -W ignore -m torch.distributed.launch --nproc_p
     --exp-name=v1 \
     --weights=${low_res_weights}
 
-pretrained_path='harmonization_exps/fixed256/hrnet18s_v2p_idih_upsample_hsl_refine_HR/000_v1/checkpoints/79.pth'
+pretrained_path='harmonization_exps/fixed256/hrnet18s_v2p_idih_upsample_hsl_refine_HR/000_v1/checkpoints/069.pth'
 CUDA_VISIBLE_DEVICES=0 python3 scripts/evaluate_upsample_refiner.py hrnet18s_v2p_idih256_upsample_hsl_refine_HR ${pretrain_path} \
     --resize-strategy Fixed256 \
     --version hsl \
