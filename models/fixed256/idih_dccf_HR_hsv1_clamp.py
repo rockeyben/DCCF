@@ -60,9 +60,9 @@ def train(model, cfg, model_cfg, start_epoch=0):
     loss_cfg.pixel_loss = MaskWeightedMSE(min_area=100)
     loss_cfg.pixel_loss_weight = 1.0
 
-    loss_cfg.pixel_loss_fullres = MaskWeightedMSE(min_area=1000,  pred_name='images_fullres', 
+    loss_cfg.pixel_loss_fullres = MaskWeightedMSE(min_area=1000,  pred_name='images_fullres',
             gt_image_name='target_images_fullres', gt_mask_name='masks_fullres')
-    loss_cfg.pixel_loss_fullres_weight = wl * 10.0
+    loss_cfg.pixel_loss_fullres_weight = wl * 5.0
 
     loss_cfg.stage1_l_loss = MaskWeightedMSE(min_area=100, pred_name='stage1_Lmap',
             gt_image_name='gt_Lmap', gt_mask_name='masks')
@@ -78,21 +78,25 @@ def train(model, cfg, model_cfg, start_epoch=0):
 
     loss_cfg.stage3_rgb_loss = MaskWeightedMSE(min_area=100, pred_name='stage3_output',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage3_rgb_loss_weight = 0
+    loss_cfg.stage3_rgb_loss_weight = 1
+
+    loss_cfg.stage3_rgb_loss_fullres = MaskWeightedMSE(min_area=1000, pred_name='stage3_output_fullres',
+            gt_image_name='target_images_fullres', gt_mask_name='masks_fullres')
+    loss_cfg.stage3_rgb_loss_fullres_weight = 5.0
 
     loss_cfg.stage1_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage1_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage1_tv_loss_weight = 0
-        
+    loss_cfg.stage1_tv_loss_weight = 1
+
     loss_cfg.stage2_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage2_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage2_tv_loss_weight = 0
+    loss_cfg.stage2_tv_loss_weight = 1
 
     loss_cfg.stage3_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage3_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage3_tv_loss_weight = 0
-    
-    num_epochs = 50
+    loss_cfg.stage3_tv_loss_weight = 1
+
+    num_epochs = 70
 
     low_res_size = (256, 256)
 
@@ -141,7 +145,7 @@ def train(model, cfg, model_cfg, start_epoch=0):
 
 
     optimizer_params = {
-        'lr': 1e-3,
+        'lr': 5e-4,
         'betas': (0.9, 0.999), 'eps': 1e-8
     }
 
@@ -149,7 +153,7 @@ def train(model, cfg, model_cfg, start_epoch=0):
         print(optimizer_params)
 
     lr_scheduler = partial(torch.optim.lr_scheduler.MultiStepLR,
-                           milestones=[30, 45], gamma=0.1)
+                           milestones=[50], gamma=0.2)
 
     trainer = UpsampleDCCFTrainer(
         model, cfg, model_cfg, loss_cfg,
@@ -184,12 +188,24 @@ def train(model, cfg, model_cfg, start_epoch=0):
             )
         ],
         checkpoint_interval=1,
-        image_dump_interval=1000    
+        image_dump_interval=1000
     )
 
     if cfg.local_rank == 0:
         logger.info(f'Starting Epoch: {start_epoch}')
         logger.info(f'Total Epochs: {num_epochs}')
     for epoch in range(start_epoch, num_epochs):
+        if epoch >= 40:
+            trainer.loss_cfg.pixel_loss_fullres_weight = 1.0
+            trainer.loss_cfg.stage1_l_loss_weight = 0.01
+            trainer.loss_cfg.stage2_s_loss_weight = 0.01
+            trainer.loss_cfg.stage3_h_loss_weight = 0.01
+            trainer.loss_cfg.stage3_rgb_loss_weight = 0.01
+            trainer.loss_cfg.stage3_rgb_loss_fullres_weight = 0.01
+            trainer.loss_cfg.stage1_tv_loss_weight = 0.01
+            trainer.loss_cfg.stage2_tv_loss_weight = 0.01
+            trainer.loss_cfg.stage3_tv_loss_weight = 0.01
+
         trainer.training(epoch)
         trainer.validation(epoch)
+
