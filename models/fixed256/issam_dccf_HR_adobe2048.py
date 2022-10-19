@@ -79,19 +79,25 @@ def train(model, cfg, model_cfg, start_epoch=0):
 
     loss_cfg.stage3_rgb_loss = MaskWeightedMSE(min_area=100, pred_name='stage3_output',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage3_rgb_loss_weight = 0
+    loss_cfg.stage3_rgb_loss_weight = 1
+    
+    loss_cfg.stage3_rgb_loss_fullres = MaskWeightedMSE(min_area=1000,
+            pred_name='stage3_output_fullres',
+            gt_image_name='target_images_fullres', gt_mask_name='masks_fullres')
+    loss_cfg.stage3_rgb_loss_fullres_weight = 1
 
     loss_cfg.stage1_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage1_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage1_tv_loss_weight = 0
+    loss_cfg.stage1_tv_loss_weight = 0.1
         
     loss_cfg.stage2_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage2_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage2_tv_loss_weight = 0
+    loss_cfg.stage2_tv_loss_weight = 0.1
 
     loss_cfg.stage3_tv_loss = MaskWeightedTV(min_area=100, pred_name='stage3_filter',
             gt_image_name='target_images', gt_mask_name='masks')
-    loss_cfg.stage3_tv_loss_weight = 0
+    loss_cfg.stage3_tv_loss_weight = 0.1
+    
     
     num_epochs = 50
 
