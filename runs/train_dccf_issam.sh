@@ -17,7 +17,7 @@ CUDA_VISIBLE_DEVICES=0,1 python3 -W ignore -m torch.distributed.launch --nproc_p
     --weights=${low_res_weights}
 
 # test
-weights="harmonization_exps/fixed256/issam_dccf_HR_hsv_1_clamp/000_v1/checkpoints/049.pth"
+weights="harmonization_exps/fixed256/issam_dccf_HR_hsv_1_clamp/000_v1/checkpoints/069.pth"
 CUDA_VISIBLE_DEVICES=1 python3 scripts/evaluate_upsample_refiner.py dccf_improved_ssam256_HR_clamp ${weights} \
     --resize-strategy Fixed256 \
     --version hsl_nobb \
