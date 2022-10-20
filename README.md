@@ -59,7 +59,7 @@ The main configuration can be changed at [mconfigs/base.py](./mconfigs/base.py)
 
 ## Evaluation
 
-You can put pretrained model at [pretrained_models/](./pretrained_models), which can be directly used to re-implement results in the paper. It can be downloaded from [BaiduCloud (w8vg)](https://pan.baidu.com/s/1u5q94SzYciYkq5rspBaN7w). 
+You can put pretrained model at [pretrained_models/](./pretrained_models), which can be directly used to re-implement results in the paper. It can be downloaded from [BaiduCloud (w8vg)](https://pan.baidu.com/s/1u5q94SzYciYkq5rspBaN7w) or [Google Drive](https://drive.google.com/drive/folders/1RFuf2zMU55ISYWSqu6HDELSxZTne8_u_?usp=sharing). 
 ```.bash
 ./runs/test_dccf_idih_hrnet18s_v2p_pretrain.sh
 ./runs/test_dccf_idih_pretrain.sh
