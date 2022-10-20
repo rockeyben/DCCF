@@ -66,7 +66,7 @@ You can put pretrained model at [pretrained_models/](./pretrained_models), which
 ./runs/test_dccf_issam_pretrain.sh
 ```
 
-To get baseline results, you can download the baseline models from [BaiduCloud (w8vg)](https://pan.baidu.com/s/1u5q94SzYciYkq5rspBaN7w) and put them at [pretrained_models/](./pretrained_models), then run:
+To get baseline results, you can download the baseline models from [BaiduCloud (w8vg)](https://pan.baidu.com/s/1u5q94SzYciYkq5rspBaN7w) or [Google Drive](https://drive.google.com/drive/folders/1RFuf2zMU55ISYWSqu6HDELSxZTne8_u_?usp=sharing) and put them at [pretrained_models/](./pretrained_models), then run:
 ```.bash
 ./runs/test_baselines_*.sh
 ```
