@@ -83,9 +83,11 @@ Our code is based on Konstantin Sofiiuk's [iDIH](https://github.com/saic-vul/ima
 
 ## Citation
 
+```
 @inproceedings{xue2022dccf,
  title={DCCF: Deep Comprehensible Color Filter Learning Framework for High-Resolution Image Harmonization},
  author={Ben Xue and Shenghui Ran and Quan Chen and Rongfei Jia and Binqiang Zhao and Binqiang Zhao},
  year={2022},
  booktitle={ECCV},
 }
+```
