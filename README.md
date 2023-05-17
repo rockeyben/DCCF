@@ -78,6 +78,8 @@ To get BGU high-resolution results, please refer to its official MATLAB implemen
 
 Run [interactive_experiments.sh](./runs/interactive_experiments.sh) to perform filter fusion with our deep comprehensible color filter. You can put customized images with their input masks in a directory and run this script.
 
+![Teaser](assets/Picture_H.png)
+
 ## Acknowledgement
 
 Our code is based on Konstantin Sofiiuk's [iDIH](https://github.com/saic-vul/image_harmonization).
